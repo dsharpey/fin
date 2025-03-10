@@ -3,483 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fin | Simple. Effective. No BS.</title>
-    <!-- Keep all the existing CSS but just showing key changes for brevity -->
+    <title>Transform Your Body - No Nonsense Guide</title>
     <style>
-  :root {
-    --primary-color: #b2aaaa;
-    --accent-color: #8c2a2a;
-    --background-color: #bab4b4;
-    --text-color: #000000;
-    --secondary-color: #bab4b3;
-}
+        :root {
+            --primary-color: #b2aaaa;
+            --accent-color: #8c2a2a;
+            --background-color: #bab4b4;
+            --text-color: #000000;
+            --secondary-color: #bab4b3;
+        }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    line-height: 1.6;
-    overflow-x: hidden;
-}
+        body {
+            background-color: var(--background-color);
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
 
-/* Text Styles */
-h1, h2, h3 {
-    color: var(--text-color);
-    text-align: center;
-}
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
 
-h1 { 
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 800;
-    line-height: 1.2;
-}
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
 
-h2 { 
-    font-size: clamp(2rem, 4vw, 3rem);
-    margin-bottom: 30px;
-}
+        .box {
+            background: var(--primary-color);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
 
-h3 { 
-    font-size: clamp(1.5rem, 3vw, 2rem);
-}
+        ul {
+            list-style: none;
+            margin: 20px 0;
+        }
 
-p { 
-    font-size: 1.2rem;
-    text-align: center;
-    margin-bottom: 1rem;
-}
+        li {
+            margin: 10px 0;
+            font-size: 1.2rem;
+        }
 
-/* Button Styles */
-.cta-button {
-    background-color: var(--accent-color);
-    color: white;
-    padding: 20px 40px;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.3rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-    text-align: center;
-    font-weight: 600;
-    min-width: 250px;
-}
+        .button {
+            background: var(--accent-color);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 100%;
+            max-width: 400px;
+            transition: transform 0.3s ease;
+        }
 
-.cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
+        .button:hover {
+            transform: translateY(-2px);
+        }
 
-.secondary-cta {
-    background: transparent;
-    border: 2px solid var(--accent-color);
-    color: var(--accent-color);
-}
+        /* Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
 
-/* Section Styles */
-.hero, .info-section, .contact-section {
-    padding: 80px 20px;
-    margin: 20px auto;
-    background: var(--primary-color);
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
+        .popup-content {
+            background: var(--primary-color);
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+        }
 
-/* Benefits Box */
-/* Change this part of the CSS */
-.benefits-grid {
-    display: flex;
-    flex-direction: column;
-    max-width: 800px;
-    margin: 40px auto;
-    gap: 20px;
-}
+        .close {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
 
-.point {
-    background: white;
-    padding: 25px 30px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    transition: transform 0.3s ease;
-    width: 100%;
-}
-
-.point p {
-    text-align: left;
-    margin: 0;
-}
-
-.benefits-list {
-    list-style: none;
-    padding: 0;
-    margin: 30px auto;
-    max-width: 800px;
-}
-
-.benefits-list li {
-    background: white;
-    padding: 20px 30px;
-    border-radius: 10px;
-    margin: 15px 0;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-}
-
-.point {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    transition: transform 0.3s ease;
-}
-
-.point:hover {
-    transform: translateY(-5px);
-}
-
-.emoji {
-    font-size: 2rem;
-}
-
-/* Popup Styles */
-.popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.popup-content {
-    background: var(--primary-color);
-    padding: 40px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 500px;
-    position: relative;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
-}
-
-.close-popup {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 24px;
-    cursor: pointer;
-    color: var(--text-color);
-    border: none;
-    background: none;
-    padding: 5px;
-}
-
-/* Form Styles */
-.email-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.email-form input {
-    padding: 15px;
-    border: 2px solid var(--secondary-color);
-    border-radius: 10px;
-    font-size: 1.1rem;
-    width: 100%;
-    transition: border-color 0.3s ease;
-}
-
-.email-form input:focus {
-    outline: none;
-    border-color: var(--accent-color);
-}
-
-.form-note {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    margin-top: 20px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .container {
-        padding: 0 15px;
-    }
-    
-    .hero, .info-section, .contact-section {
-        padding: 40px 20px;
-    }
-    
-    .benefits-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .point {
-        padding: 20px;
-    }
-    
-    .popup-content {
-        padding: 30px 20px;
-    }
-    
-    .cta-button {
-        width: 100%;
-        padding: 15px 30px;
-    }
-}
-
-/* Animations */
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.fade-in {
-    animation: fadeUp 0.6s ease forwards;
-}
-
-/* Utility Classes */
-.text-center { text-align: center; }
-.mt-2 { margin-top: 2rem; }
-.mb-2 { margin-bottom: 2rem; }
+        .popup input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid var(--secondary-color);
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
-    <!-- Lead Magnet Popup -->
-    <div class="popup-overlay" id="popup">
-        <div class="popup-content">
-            <span class="close-popup" id="closePopup">&times;</span>
-            <h2>Get The Complete Workout System</h2>
-            <p>Enter your email to receive the free guide</p>
-            <form id="workoutForm" class="email-form">
-                <input type="email" name="email" placeholder="Your email address" required>
-                <button type="submit" class="cta-button">GET THE FREE GUIDE</button>
-            </form>
-            <p class="form-note">No BS, just results. Unsubscribe anytime.</p>
+    <div class="container">
+        <h1>Transform Your Body Without the BS</h1>
+        <h2>Simple. Sustainable. No-Nonsense Approach.</h2>
+        
+        <div class="box">
+            <h2>Download The Complete Body Transformation Guide</h2>
+            <ul>
+                <li>Full Body Workout System</li>
+                <li>Simple Nutrition Framework</li>
+                <li>Progressive Overload Guide</li>
+            </ul>
+            <button class="button" id="guideButton">GET THE FREE GUIDE</button>
+        </div>
+
+        <div class="box">
+            <h2>Tired of:</h2>
+            <ul>
+                <li>Workout programs that overcomplicate everything</li>
+                <li>Confusing diet advice that changes every week</li>
+                <li>Making zero progress despite trying everything</li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <h2>Join Our Community</h2>
+            <button class="button" id="communityButton">JOIN THE COMMUNITY</button>
         </div>
     </div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1 class="hero-title">Transform Your Body Without the BS</h1>
-            <p class="hero-subtitle">Simple. Sustainable. No-Nonsense Approach.</p>
-            
-            <div class="benefits-box">
-                <h2>Download The Complete Body Transformation Guide</h2>
-                <ul class="benefits-list">
-                    <li>Full Body Workout System</li>
-                    <li>Simple Nutrition Framework</li>
-                    <li>Progressive Overload Guide</li>
-                </ul>
-                <button class="cta-button" id="openPopup">GET THE FREE GUIDE</button>
-            </div>
+    <!-- Guide Popup -->
+    <div class="popup" id="guidePopup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <h2>Get Your Free Guide</h2>
+            <form id="guideForm">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit" class="button">GET THE GUIDE</button>
+            </form>
         </div>
-    </section>
-
-    <!-- Problem Section -->
-    <section class="info-section">
-        <div class="container">
-            <h2>Tired of:</h2>
-            <div class="pain-points">
-                <div class="point">
-                    <p>Workout programs that overcomplicate everything</p>
-                </div>
-                <div class="point">
-                    <p>Confusing diet advice that changes every week</p>
-                </div>
-                <div class="point">
-                    <p>Making zero progress despite trying everything</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-        <!-- Solution Section -->
-    <section class="info-section">
-        <div class="container">
-            <h2>Here's the truth: Building an aesthetic body isn't complicated.</h2>
-            <p>But it requires the right approach.</p>
-            
-            <div class="benefits-grid">
-                <div class="point">
-                    <span class="emoji">💪</span>
-                    <p>Works for both beginners and intermediate lifters</p>
-                </div>
-                <div class="point">
-                    <span class="emoji">🎯</span>
-                    <p>Focuses on the 20% of exercises that give 80% of results</p>
-                </div>
-                <div class="point">
-                    <span class="emoji">🥗</span>
-                    <p>Shows you exactly how to eat without counting every calorie</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- What's Included Section -->
-    <section class="info-section">
-        <div class="container">
-            <h2>What's Inside The Guide</h2>
-            <div class="benefits-grid">
-                <div class="point">
-                    <span class="emoji">📋</span>
-                    <p>Complete workout routine</p>
-                </div>
-                <div class="point">
-                    <span class="emoji">📈</span>
-                    <p>Progressive overload system</p>
-                </div>
-                <div class="point">
-                    <span class="emoji">🥩</span>
-                    <p>Nutrition fundamentals</p>
-                </div>
-                <div class="point">
-                    <span class="emoji">🧠</span>
-                    <p>Mental game blueprint</p>
-                </div>
-                <div class="point">
-                    <span class="emoji">🔄</span>
-                    <p>Recovery optimization</p>
-                </div>
-                <div class="point">
-                    <span class="emoji">⚡</span>
-                    <p>Energy management guide</p>
-                </div>
-            </div>
-            <button class="cta-button" id="openPopupMid">GET THE FREE GUIDE</button>
-        </div>
-    </section>
-
-    <!-- Community Section -->
-    <section class="info-section">
-        <div class="container">
-            <h2>Want More? Join The Community</h2>
-            <div class="community-benefits">
-                <div class="point">
-                    <span class="emoji">👥</span>
-                    <p>Connect with like-minded people</p>
-                </div>
-                <div class="point">
-                    <span class="emoji">💡</span>
-                    <p>Get questions answered</p>
-                </div>
-                <div class="point">
-                    <span class="emoji">📱</span>
-                    <p>Daily accountability</p>
-                </div>
-            </div>
-            <a href="https://skool.com/[fin-community]" class="cta-button secondary-cta">JOIN THE COMMUNITY</a>
-        </div>
-    </section>
-
-    <!-- Final CTA Section -->
-    <section class="contact-section">
-        <div class="container">
-            <h2>Ready to Transform?</h2>
-            <p>Get Your Free Guide Now</p>
-            <button class="cta-button" id="openPopupFinal">GET THE FREE GUIDE</button>
-        </div>
-    </section>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get all elements
-            const popup = document.getElementById('popup');
-            const openPopupBtns = document.querySelectorAll('#openPopup, #openPopupMid, #openPopupFinal');
-            const closePopupBtn = document.getElementById('closePopup');
-            const workoutForm = document.getElementById('workoutForm');
+        // Get elements
+        const guideButton = document.getElementById('guideButton');
+        const communityButton = document.getElementById('communityButton');
+        const guidePopup = document.getElementById('guidePopup');
+        const closeButton = document.querySelector('.close');
+        const guideForm = document.getElementById('guideForm');
 
-            // Open popup function
-            function openPopup() {
-                popup.style.display = 'flex';
-                popup.style.opacity = '0';
-                setTimeout(() => {
-                    popup.style.opacity = '1';
-                }, 10);
+        // Open guide popup
+        guideButton.addEventListener('click', () => {
+            guidePopup.style.display = 'flex';
+        });
+
+        // Close popup
+        closeButton.addEventListener('click', () => {
+            guidePopup.style.display = 'none';
+        });
+
+        // Close when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === guidePopup) {
+                guidePopup.style.display = 'none';
             }
+        });
 
-            // Close popup function
-            function closePopup() {
-                popup.style.opacity = '0';
-                setTimeout(() => {
-                    popup.style.display = 'none';
-                }, 300);
-            }
+        // Community button redirect
+        communityButton.addEventListener('click', () => {
+            window.location.href = 'https://skool.com/your-community-link';
+        });
 
-            // Add click event to all popup open buttons
-            openPopupBtns.forEach(button => {
-                button.addEventListener('click', openPopup);
-            });
-
-            // Close popup when clicking the close button
-            closePopupBtn.addEventListener('click', closePopup);
-
-            // Close popup when clicking outside
-            popup.addEventListener('click', (e) => {
-                if (e.target === popup) {
-                    closePopup();
-                }
-            });
-
-            // Close popup with Escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && popup.style.display === 'flex') {
-                    closePopup();
-                }
-            });
-
-            // Form submission
-            workoutForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const email = this.querySelector('input[type="email"]').value;
-                
-                // Here you would typically send the email to your server
-                console.log('Email submitted:', email);
-
-                // Show success message
-                alert('Check your email for the workout guide!');
-                
-                // Reset form and close popup
-                this.reset();
-                closePopup();
-            });
+        // Form submission
+        guideForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = e.target.querySelector('input[type="email"]').value;
+            // Here you'd handle the email submission
+            alert('Check your email for the guide!');
+            guidePopup.style.display = 'none';
+            guideForm.reset();
         });
     </script>
 </body>
