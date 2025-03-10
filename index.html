@@ -205,6 +205,56 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        .section {
+    padding: 5rem 2rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.benefits-box, .results-box, .community-benefits, .solution-box {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    max-width: 800px;
+}
+
+ul {
+    list-style-position: inside;
+    margin: 1rem 0;
+}
+
+li {
+    margin: 1rem 0;
+    font-size: 1.1rem;
+}
+
+.problem-section ul li {
+    color: #666;
+    font-style: italic;
+}
+
+.solution-box {
+    background: var(--gradient);
+    color: white;
+}
+
+.solution-box ul li {
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.solution-box ul li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #fff;
+}
     </style>
 </head>
 <body>
@@ -264,6 +314,94 @@
             <p>Check your email for your workout plan. If you don't see it, check your spam folder.</p>
         </div>
     </div>
+
+        
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">fin</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 data-aos="fade-up">Transform Your Body Without the BS</h1>
+            <p data-aos="fade-up" data-aos-delay="100">
+                Simple. Sustainable. No-Nonsense Approach.
+            </p>
+            
+            <!-- Lead Magnet Box -->
+            <div class="benefits-box" data-aos="fade-up" data-aos-delay="150">
+                <h2>Download The Complete Body Transformation Guide</h2>
+                <ul>
+                    <li>Full Body Workout System</li>
+                    <li>Simple Nutrition Framework</li>
+                    <li>Progressive Overload Guide</li>
+                </ul>
+                <form class="email-capture" id="guideForm">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="cta-button primary-cta">GET THE FREE GUIDE</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="proof-section" data-aos="fade-up">
+        <div class="container">
+            <h3>Join Thousands Who Have Transformed Their Bodies</h3>
+            <div class="results-box">
+                <ul>
+                    <li>No Complicated Programs</li>
+                    <li>No Extreme Diets</li>
+                    <li>No Empty Promises</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community-section" data-aos="fade-up">
+        <div class="container">
+            <h3>Want More? Join The Skool Community</h3>
+            <div class="community-benefits">
+                <ul>
+                    <li>Daily Accountability</li>
+                    <li>Expert Guidance</li>
+                    <li>Like-minded People</li>
+                </ul>
+            </div>
+            <button class="cta-button secondary-cta" id="communityBtn">JOIN THE COMMUNITY</button>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section" data-aos="fade-up">
+        <div class="container">
+            <h3>Tired of:</h3>
+            <ul>
+                <li>Workout programs that overcomplicate everything</li>
+                <li>Confusing diet advice that changes every week</li>
+                <li>Making zero progress despite trying everything</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution-section" data-aos="fade-up">
+        <div class="container">
+            <h3>Here's the truth: Building an aesthetic body isn't complicated.</h3>
+            <p>But it requires the right approach.</p>
+            <div class="solution-box">
+                <p>I've spent years cutting through the BS to create a system that:</p>
+                <ul>
+                    <li>Works for both beginners and intermediate lifters</li>
+                    <li>Focuses on the 20% of exercises that give 80% of results</li>
+                    <li>Shows you exactly how to eat without counting every calorie</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
     <!-- AOS Animation Library -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
