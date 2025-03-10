@@ -6,41 +6,271 @@
     <title>Fin | Simple. Effective. No BS.</title>
     <!-- Keep all the existing CSS but just showing key changes for brevity -->
     <style>
-        /* [Previous CSS remains the same - using your color scheme] */
-        
-        /* Additional styles for Fin's specific elements */
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
+  :root {
+    --primary-color: #b2aaaa;
+    --accent-color: #8c2a2a;
+    --background-color: #bab4b4;
+    --text-color: #000000;
+    --secondary-color: #bab4b3;
+}
 
-        .hero-subtitle {
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
 
-        .benefits-list {
-            list-style: none;
-            padding: 0;
-            margin: 2rem 0;
-        }
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
 
-        .benefits-list li {
-            font-size: 1.2rem;
-            margin: 1rem 0;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
-        .benefits-list li:before {
-            content: "•";
-            color: var(--accent-color);
-            font-weight: bold;
-        }
+/* Text Styles */
+h1, h2, h3 {
+    color: var(--text-color);
+    text-align: center;
+}
+
+h1 { 
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+h2 { 
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 30px;
+}
+
+h3 { 
+    font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+p { 
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Button Styles */
+.cta-button {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    font-weight: 600;
+    min-width: 250px;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.secondary-cta {
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+/* Section Styles */
+.hero, .info-section, .contact-section {
+    padding: 80px 20px;
+    margin: 20px auto;
+    background: var(--primary-color);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Benefits Box */
+.benefits-box {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    margin: 40px auto;
+    max-width: 800px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 30px 0;
+}
+
+.benefits-list li {
+    font-size: 1.2rem;
+    margin: 15px 0;
+    padding-left: 30px;
+    position: relative;
+}
+
+.benefits-list li:before {
+    content: "•";
+    color: var(--accent-color);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+/* Grid Layouts */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.point {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.3s ease;
+}
+
+.point:hover {
+    transform: translateY(-5px);
+}
+
+.emoji {
+    font-size: 2rem;
+}
+
+/* Popup Styles */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.popup-content {
+    background: var(--primary-color);
+    padding: 40px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.close-popup {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-color);
+    border: none;
+    background: none;
+    padding: 5px;
+}
+
+/* Form Styles */
+.email-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.email-form input {
+    padding: 15px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    font-size: 1.1rem;
+    width: 100%;
+    transition: border-color 0.3s ease;
+}
+
+.email-form input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.form-note {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .hero, .info-section, .contact-section {
+        padding: 40px 20px;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .point {
+        padding: 20px;
+    }
+    
+    .popup-content {
+        padding: 30px 20px;
+    }
+    
+    .cta-button {
+        width: 100%;
+        padding: 15px 30px;
+    }
+}
+
+/* Animations */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeUp 0.6s ease forwards;
+}
+
+/* Utility Classes */
+.text-center { text-align: center; }
+.mt-2 { margin-top: 2rem; }
+.mb-2 { margin-bottom: 2rem; }
     </style>
 </head>
 <body>
