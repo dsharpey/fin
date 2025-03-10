@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fin's Fitness Guide</title>
+    <title>Fin | Simple. Effective. No BS.</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #b2aaaa;
@@ -11,216 +15,338 @@
             --background-color: #bab4b4;
             --text-color: #000000;
             --secondary-color: #bab4b3;
+            --gradient: linear-gradient(135deg, var(--accent-color), #4a1515);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background-color: var(--background-color);
-            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
+            background: var(--background-color);
+            color: var(--text-color);
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .hero-container {
-            text-align: center;
-            padding: 60px 20px;
-            background-color: var(--primary-color);
-            border-radius: 10px;
-            margin-bottom: 30px;
-        }
-
-        h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
+        .nav-logo {
+            font-size: 1.5rem;
             font-weight: 800;
+            color: var(--accent-color);
         }
 
-        h2 {
-            font-size: 2em;
-            margin-bottom: 30px;
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .benefits-box, .results-box, .community-benefits {
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            margin: 20px auto;
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
             max-width: 600px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 0 auto 2rem;
+            opacity: 0.9;
         }
 
-        .email-capture {
-            margin: 30px 0;
+        .cta-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
-        input[type="email"] {
-            padding: 15px;
-            width: 300px;
-            border: none;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-
-        button {
-            background-color: var(--accent-color);
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
+        .cta-button {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
         }
 
-        button:hover {
+        .primary-cta {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .secondary-cta {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* Modal Styles */
         .modal {
-            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
             z-index: 1000;
         }
 
-        .modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 500px;
-            margin: 100px auto;
-            position: relative;
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .close {
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
             position: absolute;
-            right: 20px;
-            top: 10px;
-            font-size: 24px;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
             cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        @media (max-width: 768px) {
+            .cta-container {
+                flex-direction: column;
+            }
+
+            .cta-button {
+                width: 100%;
+            }
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-up.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Hero Section -->
-        <div class="hero-container">
-            <h1>Get Lean. Get Strong. No BS.</h1>
-            <h2>Download The Complete Body Transformation Guide</h2>
-            
-            <div class="benefits-box">
-                • Full Body Workout System<br>
-                • Simple Nutrition Framework<br>
-                • Progressive Overload Guide
-            </div>
 
-            <form class="email-capture" id="guideForm">
-                <input type="email" placeholder="Enter your email" required>
-                <button type="submit">GET THE FREE GUIDE</button>
+    <body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">fin</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 data-aos="fade-up">Transform Your Body.<br>No BS Required.</h1>
+            <p data-aos="fade-up" data-aos-delay="100">
+                A complete system for building an aesthetic physique. 
+                Simple. Effective. Proven to work.
+            </p>
+            <div class="cta-container">
+                <button class="cta-button primary-cta" data-aos="fade-up" data-aos-delay="200" id="workoutBtn">
+                    Get The Free Workout Plan
+                </button>
+                <button class="cta-button secondary-cta" data-aos="fade-up" data-aos-delay="300" id="communityBtn">
+                    Join The Community
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workout Plan Modal -->
+    <div class="modal" id="workoutModal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h2>Get Your Free Workout Plan</h2>
+            <p>Enter your email to receive the complete system.</p>
+            <form id="workoutForm">
+                <div class="form-group">
+                    <input 
+                        type="email" 
+                        class="form-input" 
+                        placeholder="Your email address"
+                        required
+                    >
+                </div>
+                <button type="submit" class="cta-button primary-cta">
+                    Send Me The Plan
+                </button>
             </form>
         </div>
-
-        <!-- Social Proof -->
-        <div class="proof-container">
-            <h3>Join Thousands Who Have Transformed Their Bodies</h3>
-            
-            <div class="results-box">
-                • No Complicated Programs<br>
-                • No Extreme Diets<br>
-                • No Empty Promises
-            </div>
-        </div>
-
-        <!-- Community Section -->
-        <div class="community-container">
-            <h3>Want More? Join The Skool Community</h3>
-            
-            <div class="community-benefits">
-                • Daily Accountability<br>
-                • Expert Guidance<br>
-                • Like-minded People
-            </div>
-
-            <button id="communityBtn">JOIN THE COMMUNITY</button>
-        </div>
     </div>
 
-    <!-- Guide Modal -->
-    <div id="guideModal" class="modal">
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Thank You!</h3>
-            <p>Check your email for the guide. If you don't see it, check your spam folder.</p>
+            <button class="close-modal">&times;</button>
+            <h2>You're All Set! 🎉</h2>
+            <p>Check your email for your workout plan. If you don't see it, check your spam folder.</p>
         </div>
     </div>
 
-    <!-- Community Modal -->
-    <div id="communityModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Join Our Skool Community</h3>
-            <p>Redirecting you to our community platform...</p>
-        </div>
-    </div>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
-        // Get modal elements
-        const guideModal = document.getElementById('guideModal');
-        const communityModal = document.getElementById('communityModal');
-        const guideForm = document.getElementById('guideForm');
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Modal Functionality
+        const workoutBtn = document.getElementById('workoutBtn');
         const communityBtn = document.getElementById('communityBtn');
-        const closeButtons = document.getElementsByClassName('close');
+        const workoutModal = document.getElementById('workoutModal');
+        const successModal = document.getElementById('successModal');
+        const closeButtons = document.querySelectorAll('.close-modal');
+        const workoutForm = document.getElementById('workoutForm');
 
-        // Guide form submission
-        guideForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            guideModal.style.display = 'block';
-            // Here you would typically handle the email submission
-            setTimeout(() => {
-                guideModal.style.display = 'none';
-            }, 3000);
+        // Open workout modal
+        workoutBtn.addEventListener('click', () => {
+            workoutModal.classList.add('active');
         });
 
-        // Community button click
-        communityBtn.addEventListener('click', function() {
-            communityModal.style.display = 'block';
-            setTimeout(() => {
-                window.location.href = 'https://www.skool.com/community'; // Replace with actual URL
-            }, 2000);
+        // Community button redirect
+        communityBtn.addEventListener('click', () => {
+            window.location.href = 'https://skool.com/your-community'; // Replace with actual URL
         });
 
-        // Close button functionality
-        Array.from(closeButtons).forEach(button => {
-            button.addEventListener('click', function() {
-                guideModal.style.display = 'none';
-                communityModal.style.display = 'none';
+        // Close modals
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                workoutModal.classList.remove('active');
+                successModal.classList.remove('active');
             });
         });
 
-        // Click outside modal to close
-        window.addEventListener('click', function(event) {
-            if (event.target == guideModal) {
-                guideModal.style.display = 'none';
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
             }
-            if (event.target == communityModal) {
-                communityModal.style.display = 'none';
+        });
+
+        // Form submission
+        workoutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = workoutForm.querySelector('input[type="email"]').value;
+            
+            // Here you would typically send the email to your server
+            console.log('Email submitted:', email);
+
+            // Close workout modal and show success modal
+            workoutModal.classList.remove('active');
+            successModal.classList.add('active');
+
+            // Reset form
+            workoutForm.reset();
+
+            // Close success modal after 3 seconds
+            setTimeout(() => {
+                successModal.classList.remove('active');
+            }, 3000);
+        });
+
+        // Smooth scroll functionality
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll animation classes
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
             }
         });
     </script>
