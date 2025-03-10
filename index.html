@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fin's Fitness Guide</title>
+    <style>
+        :root {
+            --primary-color: #b2aaaa;
+            --accent-color: #8c2a2a;
+            --background-color: #bab4b4;
+            --text-color: #000000;
+            --secondary-color: #bab4b3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero-container {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: var(--primary-color);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+
+        .benefits-box, .results-box, .community-benefits {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .email-capture {
+            margin: 30px 0;
+        }
+
+        input[type="email"] {
+            padding: 15px;
+            width: 300px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-container">
+            <h1>Get Lean. Get Strong. No BS.</h1>
+            <h2>Download The Complete Body Transformation Guide</h2>
+            
+            <div class="benefits-box">
+                • Full Body Workout System<br>
+                • Simple Nutrition Framework<br>
+                • Progressive Overload Guide
+            </div>
+
+            <form class="email-capture" id="guideForm">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">GET THE FREE GUIDE</button>
+            </form>
+        </div>
+
+        <!-- Social Proof -->
+        <div class="proof-container">
+            <h3>Join Thousands Who Have Transformed Their Bodies</h3>
+            
+            <div class="results-box">
+                • No Complicated Programs<br>
+                • No Extreme Diets<br>
+                • No Empty Promises
+            </div>
+        </div>
+
+        <!-- Community Section -->
+        <div class="community-container">
+            <h3>Want More? Join The Skool Community</h3>
+            
+            <div class="community-benefits">
+                • Daily Accountability<br>
+                • Expert Guidance<br>
+                • Like-minded People
+            </div>
+
+            <button id="communityBtn">JOIN THE COMMUNITY</button>
+        </div>
+    </div>
+
+    <!-- Guide Modal -->
+    <div id="guideModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Thank You!</h3>
+            <p>Check your email for the guide. If you don't see it, check your spam folder.</p>
+        </div>
+    </div>
+
+    <!-- Community Modal -->
+    <div id="communityModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Join Our Skool Community</h3>
+            <p>Redirecting you to our community platform...</p>
+        </div>
+    </div>
+
+    <script>
+        // Get modal elements
+        const guideModal = document.getElementById('guideModal');
+        const communityModal = document.getElementById('communityModal');
+        const guideForm = document.getElementById('guideForm');
+        const communityBtn = document.getElementById('communityBtn');
+        const closeButtons = document.getElementsByClassName('close');
+
+        // Guide form submission
+        guideForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            guideModal.style.display = 'block';
+            // Here you would typically handle the email submission
+            setTimeout(() => {
+                guideModal.style.display = 'none';
+            }, 3000);
+        });
+
+        // Community button click
+        communityBtn.addEventListener('click', function() {
+            communityModal.style.display = 'block';
+            setTimeout(() => {
+                window.location.href = 'https://www.skool.com/community'; // Replace with actual URL
+            }, 2000);
+        });
+
+        // Close button functionality
+        Array.from(closeButtons).forEach(button => {
+            button.addEventListener('click', function() {
+                guideModal.style.display = 'none';
+                communityModal.style.display = 'none';
+            });
+        });
+
+        // Click outside modal to close
+        window.addEventListener('click', function(event) {
+            if (event.target == guideModal) {
+                guideModal.style.display = 'none';
+            }
+            if (event.target == communityModal) {
+                communityModal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
